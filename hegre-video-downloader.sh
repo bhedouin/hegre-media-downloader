@@ -14,7 +14,7 @@ printf "This can take some time depending on the number of URLs to process\n"
 get_the_hegre_links () {
     for line in $(cat "$FILE");
     do
-      curl -s "$line" | grep -v "p.hegre.com" | grep -v "cdn2.hegre.com" | grep -E '.zip|.jpg' | grep -o "http[^ '\"]*" | sed 's/\?.*//' | awk 'NR>1' | head -n 2;
+      curl -s "$line" | grep -v "p.hegre.com" | grep -v "cdn2.hegre.com" | grep -E '.mp4|.jpg' | grep -o "http[^ '\"]*" | sed 's/\?.*//' | awk 'NR>1' | head -n 2;
     done > "$OUTPUT"
 }
 
@@ -22,6 +22,6 @@ time get_the_hegre_links
 
 whiptail --title "Hegre Video Downloader" --msgbox "— After clicking ok, a download screen will appear. You can run 'CTRL + A + D' to keep it in the background.\n— To see the list of retrieved urls, run the command 'cat $OUTPUT'." 10 60
 
-screen -dmS download_hegre_videos bash -c "wget -i $OUTPUT -q --show-progress --user $USER --password $PASSWORD -no-clober"
+screen -dmS download_hegre_videos bash -c "wget -i $OUTPUT -q --show-progress --user $USER --password $PASSWORD --no-clober"
 
 screen -r download_hegre_videos
