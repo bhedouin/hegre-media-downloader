@@ -6,13 +6,13 @@ Hegre Video Downloader allows you to download a list of contents by providing a 
 
 ## Getting Started
 
-This tool is distributed for educational purposes and we are not responsible for any abuse that may occur.
+This tool is distributed for educational purposes, and we are not responsible for any abuse that may occur.
 
 ### Prerequisites
 
 1. First, you need to get the list of URLs by scrolling down to the bottom of the page to load everything, and then run the two JavaScript codes in your browser's console when you are on the respective pages of the [movie](https://www.hegre.com/movies) or [photo](https://www.hegre.com/photos) category.
 
-#### — To get the URLs of the movies
+#### To get the URLs of the movies
 
 ```js
 let L = [];
@@ -23,7 +23,7 @@ console.log(L.length);
 L.join('\\n');
 ```
 
-#### — To obtain the URLs of the photos
+#### To obtain the URLs of the photos
 
 ```js
 let L = [];
@@ -34,24 +34,46 @@ console.log(L.length);
 L.join('\\n');
 ```
 
-Then you need to add the resulting URLs to a file for the second step. There may be some unwanted carractere residue that you need to remove with your text editor and align the URLs line by line.
+Then you need to add the URLs to a file for the second step. There may be some unwanted character residue that you need to remove with your text editor and align the URLs line by line.
 
-2. When you are done, you need to go to your terminal and download the necessary dependencies if you have not already done so.
+2. When you are done, you need to go to your terminal and download the dependency if you haven't already done so.
 
 ```bash
-sudo apt install -y screen whiptail
+sudo apt install screen
 ```
 
 ## Usage
 
-To use this tool, simply run this command or download the script and follow the steps
+To use this tool, simply download the script and follow these steps.
 
 ```bash
-bash <(wget -qO- https://github.com/baptiste313/hegre-video-downloader/raw/main/hegre-video-downloader.sh)
+wget https://github.com/baptiste313/hegre-video-downloader/raw/main/hegre-video-downloader.sh
+```
+
+```bash
+chmod +x hegre-video-downloader.sh
+```
+
+```bash
+bash hegre-video-downloader.sh
 ```
 
 In the default configuration, the script also fetches the thumbnails.
 
+If you need, the images are the same name as the video file you can use its two commands after the end of the download.
+
+```bash
+for line in *.mp4; do printf "%s\n" "$line"; done | sed 's/.mp4/.jpg/' > new_name.txt
+```
+
+```bash
+paste -d' ' <(ls *.jpg) new_name.txt | xargs -n2 echo
+```
+
 ## Contributing
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. Don't forget to give the project a star! Thanks again!
+
+## Acknowledgments
+
+- <https://unix.stackexchange.com/a/152669>
