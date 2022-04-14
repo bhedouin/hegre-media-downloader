@@ -2,7 +2,7 @@
 
 whiptail --title "Hegre Media Downloader" --msgbox "Thank you for downloading the program, after this message you will have to enter your login and the name of the file containing the list of URLs then the download will start. \nIf you find this program useful, don't forget to give a star! \n— https://github.com/baptiste313/hegre-video-downloader/" 15 60
 
-INDEX=$(whiptail --inputbox "Enter the url with an index of content to download, or leave blank if you have a list of content to download:" 10 60 "https://www.hegre.com/search?year=2022" 3>&1 1>&2 2>&3)
+INDEX=$(whiptail --inputbox "Enter the url with an index of content to download, or leave blank if you have a custom list of content to download:" 10 60 "https://www.hegre.com/search?year=2022" 3>&1 1>&2 2>&3)
 FILE=$(whiptail --inputbox "Enter the name of the file where the raw URLs are stored:" 10 60 "2022.txt" 3>&1 1>&2 2>&3)
 OUTPUT=$(whiptail --inputbox "Enter the name of the file where the list of direct media to be downloaded will be stored:" 10 60 "file_to_download.txt" 3>&1 1>&2 2>&3)
 USER=$(whiptail --inputbox "Enter your username:" 10 60 3>&1 1>&2 2>&3)
