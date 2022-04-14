@@ -1,4 +1,4 @@
-[![Contributors](https://img.shields.io/github/contributors/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/graphs/contributors) [![Issues](https://img.shields.io/github/issues/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/issues) [![Stargazers](https://img.shields.io/github/stars/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/stargazers) [![Forks](https://img.shields.io/github/forks/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/network/members) [![Apache License 2.0](https://img.shields.io/github/license/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/blob/master/LICENSE)
+![Contributors](https://img.shields.io/github/contributors/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/graphs/contributors) [![Issues](https://img.shields.io/github/issues/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/issues) [![Stargazers](https://img.shields.io/github/stars/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/stargazers) [![Forks](https://img.shields.io/github/forks/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/network/members) [![Apache License 2.0](https://img.shields.io/github/license/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/blob/master/LICENSE)
 
 # Hegre Media Downloader
    
@@ -10,7 +10,20 @@ This tool is distributed for educational purposes, and we are not responsible fo
 
 ### Prerequisites
 
-1. First, you need to get the list of URLs by scrolling down to the bottom of the page to load everything, and then run the two JavaScript codes in your browser's console when you are on the respective pages of the [movie](https://www.hegre.com/movies) or [photo](https://www.hegre.com/photos) category.
+1. First, decide what content you want to download. You can download single items, a list of items, a whole year, or the whole site.
+
+Example URLS:
+[All Movies](https://www.hegre.com/movies) 
+[All Galleries](https://www.hegre.com/photos)
+[All 2022](https://www.hegre.com/?types=&year=2022)
+[All 2022 Galleries](https://www.hegre.com/?types=Gallery&year=2022)
+[All 2020 Movies](https://www.hegre.com/?types=Films&year=2022)
+[Search Results](https://www.hegre.com/search?q=beach)
+[Search Results, Film Only](https://www.hegre.com/search?q=beach&types=Film)
+
+If you have a custom list, add it to a text file in the same directory as the script. 
+
+All content from 2022 will be added to 2022.txt and a list of media will be added to files-to-download.txt if you don't edit the defaults.
 
 
 2. When you are done, you need to go to your terminal and download the dependency if you haven't already done so.
