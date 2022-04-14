@@ -14,12 +14,19 @@ This tool is distributed for educational purposes, and we are not responsible fo
 
 Example URLS:
 [All Movies](https://www.hegre.com/movies) 
+  
 [All Galleries](https://www.hegre.com/photos)
+  
 [All 2022](https://www.hegre.com/?types=&year=2022)
+  
 [All 2022 Galleries](https://www.hegre.com/?types=Gallery&year=2022)
+  
 [All 2020 Movies](https://www.hegre.com/?types=Films&year=2022)
+  
 [Search Results](https://www.hegre.com/search?q=beach)
+  
 [Search Results, Film Only](https://www.hegre.com/search?q=beach&types=Film)
+  
 
 If you have a custom list, add it to a text file in the same directory as the script. 
 
