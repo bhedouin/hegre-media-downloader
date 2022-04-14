@@ -1,4 +1,4 @@
-[![Contributors](https://img.shields.io/github/contributors/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/graphs/contributors) [![Issues](https://img.shields.io/github/issues/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/issues) [![Stargazers](https://img.shields.io/github/stars/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/stargazers) [![Forks](https://img.shields.io/github/forks/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/network/members) [![Apache License 2.0](https://img.shields.io/github/license/ZMarkC/hegre-media-downloader.svg?style=for-the-badge)](https://github.com/ZMarkC/hegre-media-downloader/blob/master/LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/baptiste313/hegre-video-downloader.svg?style=for-the-badge)](https://github.com/baptiste313/hegre-video-downloader/graphs/contributors) [![Issues](https://img.shields.io/github/issues/baptiste313/hegre-video-downloader.svg?style=for-the-badge)](https://github.com/baptiste313/hegre-video-downloader/issues) [![Stargazers](https://img.shields.io/github/stars/baptiste313/hegre-video-downloader.svg?style=for-the-badge)](https://github.com/baptiste313/hegre-video-downloader/stargazers) [![Forks](https://img.shields.io/github/forks/baptiste313/hegre-video-downloader.svg?style=for-the-badge)](https://github.com/baptiste313/hegre-video-downloader/network/members) [![Apache License 2.0](https://img.shields.io/github/license/baptiste313/hegre-video-downloader.svg?style=for-the-badge)](https://github.com/baptiste313/hegre-video-downloader/blob/master/LICENSE)
 
 # Hegre Media Downloader
    
@@ -12,7 +12,7 @@ This tool is distributed for educational purposes, and we are not responsible fo
 
 1. First, decide what content you want to download. You can download single items, a list of items, a whole year, or the whole site.
 
-Example URLS:
+Example URLs:
 All Movies https://www.hegre.com/movies
   
 All Galleries https://www.hegre.com/photos
