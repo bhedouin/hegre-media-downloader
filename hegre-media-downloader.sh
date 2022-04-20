@@ -1,34 +1,80 @@
 #!/bin/bash
 
-whiptail --title "Hegre Media Downloader" --msgbox "Thank you for downloading the program, after this message you will have to enter your login and the name of the file containing the list of URLs then the download will start. \nIf you find this program useful, don't forget to give a star! \n— https://github.com/baptiste313/hegre-video-downloader/" 15 60
+title="Hegre Media Downloader"
+error="$(tput setaf 1)ERROR!$(tput sgr 0)"
+success="$(tput setaf 2)SUCCESS!$(tput sgr 0)"
+warning="$(tput setaf 11)WARNING!$(tput sgr 0)"
 
-INDEX=$(whiptail --inputbox "Enter the url with an index of content to download, or leave blank if you have a custom list of content to download:" 10 60 "https://www.hegre.com/search?year=2022" 3>&1 1>&2 2>&3)
-FILE=$(whiptail --inputbox "Enter the name of the file where the raw URLs are stored:" 10 60 "2022.txt" 3>&1 1>&2 2>&3)
-OUTPUT=$(whiptail --inputbox "Enter the name of the file where the list of direct media to be downloaded will be stored:" 10 60 "file_to_download.txt" 3>&1 1>&2 2>&3)
-USER=$(whiptail --inputbox "Enter your username:" 10 60 3>&1 1>&2 2>&3)
-PASSWORD=$(whiptail --passwordbox "Enter your password:" 10 60 3>&1 1>&2 2>&3)
-
-clear
-
-printf "This can take some time depending on the number of URLs to process\n"
-
-create_hegre_links () {
-     curl -s "$INDEX" | grep "p.hegre.com" | cut -d "<" --output-delimiter ">" -f 2 |sed 's,a href=",https://www.hegre.com,'|sed 's/" .*/ /' > "$FILE"
+require() {
+    for what in "$@"; do
+        if ! (which "$what" >& /dev/null); then
+            printf "%s\n $error $what is required to run this script, please install it"
+            exit 1
+        fi
+    done
 }
 
-time create_hegre_links
+require pv screen whiptail
 
-get_the_hegre_links () {
-    for line in $(cat "$FILE");
-    do
-      curl -s "$line" | grep -v "p.hegre.com" | grep -v "cdn2.hegre.com" | grep -E '.mp4|.zip|.jpg' | grep -o "http[^ '\"]*" | sed 's/\?.*//' | awk 'NR>1' | head -n 2;
-    done > "$OUTPUT"
+whiptail --title "$title" --msgbox "Thank you for downloading the program, after this message you will have to enter your login and the name of the file containing the list of URLs then the download will start. \nIf you find this program useful, don't forget to give a star! \n— https://github.com/baptiste313/hegre-video-downloader/" 15 60
+
+base_urls_list=$(whiptail --inputbox "Enter the name of the file where the raw URLs are stored:" 10 60 "base_urls_list.txt" 3>&1 1>&2 2>&3)
+raw_urls_list=$(whiptail --inputbox "Enter the name of the file where the list of direct media to be downloaded will be stored:" 10 60 "raw_urls_list.txt" 3>&1 1>&2 2>&3)
+username=$(whiptail --inputbox "Enter your username:" 10 60 3>&1 1>&2 2>&3)
+password=$(whiptail --passwordbox "Enter your password:" 10 60 3>&1 1>&2 2>&3)
+
+# Creation of raw links to download videos and thumbnails
+
+create_raw_links_to_download_videos_and_thumbnails () {
+	grep -v '^ *#' < "$base_urls_list" | while IFS= read -r line; do
+		curl -s "$line" | grep -v "p.hegre.com" | grep -v "cdn2.hegre.com" | grep -E '.mp4|.zip|.jpg' | grep -o "http[^ '\"]*" | sed 's/\?.*//' | awk 'NR>1' | head -n 2;
+	done > "$raw_urls_list"
 }
 
-time get_the_hegre_links
+# Creation of raw links to download videos and not thumbnails
 
-whiptail --title "Hegre Media Downloader" --msgbox "— After clicking ok, a download screen will appear. You can run 'CTRL + A + D' to keep it in the background.\n— To see the list of retrieved urls, run the command 'cat $OUTPUT'." 10 60
+create_raw_links_to_download_videos_and_not_thumbnails () {
+        grep -v '^ *#' < "$base_urls_list" | while IFS= read -r line; do
+                curl -s "$line" | grep -v "p.hegre.com" | grep -v "cdn2.hegre.com" | grep -E '.mp4|.zip' | grep -o "http[^ '\"]*" | sed 's/\?.*//' | awk 'NR>1' | head -n 1;
+        done > "$raw_urls_list"
+}
 
-screen -dmS download_hegre_content bash -c "wget -i $OUTPUT -q --show-progress --user $USER --password $PASSWORD --no-clober"
 
-screen -r download_hegre_content
+printf "%s\n $warning This can take a while depending on the number of URLs to process\n"
+
+while [[ "$1" != "" ]]; do
+	case $1 in
+                "--url" )
+                        url_base=$2
+			printf "%s\n $success $url_base\n"
+			shift
+                        ;;
+		"--create-links" )
+			if [[  $2 = "yes"  ]] ; then
+				curl -s "$url_base" | grep "p.hegre.com" | cut -d "<" --output-delimiter ">" -f 2 | sed 's,a href=",https://www.hegre.com,'| sed 's/" .*/ /' > "$base_urls_list"
+				printf "%s\n $success Creation of raw links to download videos and thumbnails\n"
+			fi
+			shift
+			;;
+		"--thumbnail" )
+			if [[  "$2" = "yes"  ]] ; then
+				create_raw_links_to_download_videos_and_thumbnails | pv
+				printf "%s\n $success Creation of raw links to download videos and thumbnails\n"
+			else
+				create_raw_links_to_download_videos_and_not_thumbnails | pv
+				printf "%s\n $success Creation of raw links to download videos and not thumbnails\n"
+			fi
+			shift
+			;;
+                "--download" )
+			whiptail --title "$title" --msgbox "— After clicking ok, a download screen will appear. You can run 'CTRL + A + D' to keep it in the background.\n— To see the list of retrieved urls, run the command 'cat $raw_urls_list'." 10 60
+                        screen -dmS download_hegre_content bash -c "wget -i $raw_urls_list -q --show-progress --user $username --password $password"
+			screen -r download_hegre_content
+                        ;;
+		*)
+			printf "\e[91m\e[1mERROR!\e[0m Invalid argument was detected!\n"
+                	exit 1;
+			;;
+        esac
+	shift
+done
