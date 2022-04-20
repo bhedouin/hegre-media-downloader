@@ -12,31 +12,26 @@ This tool is distributed for educational purposes, and we are not responsible fo
 
 1. First, decide what content you want to download. You can download single items, a list of items, a whole year, or the whole site.
 
-Example URLs:
-All Movies https://www.hegre.com/movies
-  
-All Galleries https://www.hegre.com/photos
-  
-All 2022 https://www.hegre.com/?types=&year=2022
-  
-All 2022 Galleries https://www.hegre.com/?types=Gallery&year=2022
-  
-All 2020 Movies https://www.hegre.com/?types=Films&year=2022
-  
-Search Results https://www.hegre.com/search?q=beach
-  
-Search Results, Film Only https://www.hegre.com/search?q=beach&types=Film
-  
+Example URLs :
 
-If you have a custom list, add it to a text file in the same directory as the script. 
+- All Movies : https://www.hegre.com/movies
+- All Galleries : https://www.hegre.com/photos
+- All 2022 : https://www.hegre.com/?year=2022
+- All 2022 Galleries : https://www.hegre.com/?types=Gallery&year=2022
+- All 2020 Movies : https://www.hegre.com/?types=Films&year=2022
+- Search Results : https://www.hegre.com/?q=beach
+- Search Results, Film Only : https://www.hegre.com/?q=beach&types=Film
 
-All content from 2022 will be added to 2022.txt and a list of media will be added to files-to-download.txt if you don't edit the defaults.
-
+If you have a custom list, add it to a text file in the same directory as the script.
 
 2. When you are done, you need to go to your terminal and download the dependency if you haven't already done so.
 
 ```bash
-sudo apt install screen whiptail wget curl sed grep
+sudo apt install pv screen whiptail
+```
+
+```bash
+sudo yum install pv screen newt
 ```
 
 ## Usage
@@ -52,7 +47,7 @@ chmod +x hegre-media-downloader.sh
 ```
 
 ```bash
-bash hegre-media-downloader.sh
+bash hegre-media-downloader.sh --url https://www.hegre.com/search?year=2022 --create-links yes --thumbnail yes --download
 ```
 
 In the default configuration, the script also fetches the thumbnails.
@@ -73,4 +68,6 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 ## Acknowledgments
 
+- <https://gist.github.com/itayd/816290>
 - <https://unix.stackexchange.com/a/152669>
+- <https://www.reddit.com/r/bash/comments/brfsf8/comment/eodu2e4>
