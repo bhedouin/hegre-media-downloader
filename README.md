@@ -39,15 +39,11 @@ sudo yum install pv screen newt
 To use this tool, simply download the script and follow these steps.
 
 ```bash
-wget https://github.com/ZMarkC/hegre-media-downloader/raw/main/hegre-media-downloader.sh
+wget https://github.com/baptiste313/hegre-media-downloader/raw/main/hegre-media-downloader.sh
 ```
 
 ```bash
-chmod +x hegre-media-downloader.sh
-```
-
-```bash
-bash hegre-media-downloader.sh --url https://www.hegre.com/search?year=2022 --create-links yes --thumbnail yes --download
+bash hegre-media-downloader.sh --url https://www.hegre.com/?year=2022 --create-links yes --thumbnail yes --download
 ```
 
 In the default configuration, the script also fetches the thumbnails.
